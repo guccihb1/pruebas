@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Centro Saturno</title>
+  <link rel="icon" href="Logo_saturno.gif" type="image/gif" />
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+    }
+
+    .left-bar {
+      width: 200px;
+      background-color: #333;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      transform: translateX(-200px);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      padding: 0;
+    }
+
+    .left-bar.visible {
+      transform: translateX(0);
+    }
+
+    .left-bar a {
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      display: block;
+      transition: color 0.3s ease;
+    }
+
+    .left-bar a:hover {
+      color: #bbb;
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      margin-left: 0;
+      width: 100%;
+      transition: margin-left 0.3s ease, width 0.3s ease;
+    }
+
+    .main-container.shifted {
+      margin-left: 200px;
+      width: calc(100% - 200px);
+    }
+
+    .top-bar {
+      height: 50px;
+      background-color: #444;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      direction: rtl;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 24px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 90vw;
+      max-width: 1200px;
+      height: 220px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #fff;
+      background-color: #111;
+      margin-top: 10px;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 5px 0;
+    }
+
+    .mini-slide {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      text-align: center;
+    }
+
+    .mini-slide .text-top,
+    .mini-slide .text-bottom {
+      font-size: 14px;
+      white-space: nowrap;
+      color: #fff;
+    }
+
+    .mini-slide img {
+      width: 100%;
+      max-height: 140px;
+      object-fit: contain;
+      border-radius: 10px;
+      background-color: #222;
+      box-shadow: 0 0 10px #333 inset;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      gap: 12px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      background-color: #666;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: #fff;
+    }
+
+    .footer {
+      background-color: #444;
+      color: #ccc;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      width: 100vw;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      text-align: left;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: right;
+    }
+
+    .footer-right img {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra izquierda -->
+  <div class="left-bar" id="leftBar">
+    <a href="registro.html">Registro</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="rango.html">Rangos</a>
+  </div>
+
+  <!-- Contenedor principal -->
+  <div class="main-container" id="mainContainer">
+
+    <!-- Barra superior -->
+    <div class="top-bar">
+      <i class="bi bi-list menu-icon" id="menuToggle"></i>
+    </div>
+
+    <!-- Contenido -->
+    <div class="content">
+      <h2>¡¡Conoce a la administración!!</h2>
+
+      <div class="slider-container">
+        <div class="slider" id="slider1">
+          <div class="slide">
+            <div class="mini-slide">
+              <div class="text-top">Frog213</div>
+              <img src="https://www.habbo.es/habbo-imaging/avatarimage?direction=4&head_direction=3&action=wav&gesture=sml&size=m&user=Frog213" alt="Frog213" />
+              <div class="text-bottom">Dueño</div>
+            </div>
+            <div class="mini-slide">
+              <div class="text-top">srdiemarlaj</div>
+              <img src="https://www.habbo.es/habbo-imaging/avatarimage?direction=4&head_direction=3&action=wav&gesture=sml&size=m&user=srdiemarlaj" alt="srdiemarlaj" />
+              <div class="text-bottom">Dueña</div>
+            </div>
+            <div class="mini-slide">
+              <div class="text-top">juandi01000</div>
+              <img src="https://www.habbo.es/habbo-imaging/avatarimage?direction=4&head_direction=3&action=wav&gesture=sml&size=m&user=juandi01000" alt="juandi01000" />
+              <div class="text-bottom">Socio</div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="mini-slide">
+              <div class="text-top">Texto arriba 3</div>
+              <img src="https://www.habbo.es/habbo-imaging/avatarimage?direction=4&head_direction=3&action=wav&gesture=sml&size=m&user=Frog213" alt="Texto arriba 3" />
+              <div class="text-bottom">Texto abajo 3</div>
+            </div>
+            <div class="mini-slide">
+              <div class="text-top">Texto arriba 3</div>
+              <img src="https://www.habbo.es/habbo-imaging/avatarimage?direction=4&head_direction=3&action=wav&gesture=sml&size=m&user=Frog213" alt="Texto arriba 3" />
+              <div class="text-bottom">Texto abajo 3</div>
+            </div>
+            <div class="mini-slide">
+              <div class="text-top">Mi-Abuelo</div>
+              <img src="https://www.habbo.es/habbo-imaging/avatarimage?direction=4&head_direction=3&action=wav&gesture=sml&size=m&user=Mi-Abuelo" alt="Mi-Abuelo" />
+              <div class="text-bottom">Configurador de Web</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dots" id="dots1">
+        <span class="dot active" onclick="goToSlide(1, 0)"></span>
+        <span class="dot" onclick="goToSlide(1, 1)"></span>
+      </div>
+
+      <h2>¡¡Conoce las Membresías!!</h2>
+
+      <div class="slider-container">
+        <div class="slider" id="slider2">
+          <div class="slide">
+            <div class="mini-slide">
+              <div class="text-top">Texto arriba A</div>
+              <img src="Logo_saturno.gif" alt="Logo A" />
+              <div class="text-bottom">Texto abajo A</div>
+            </div>
+            <div class="mini-slide">
+              <div class="text-top">Texto arriba B</div>
+              <img src="Logo_saturno.gif" alt="Logo B" />
+              <div class="text-bottom">Texto abajo B</div>
+            </div>
+            <div class="mini-slide">
+              <div class="text-top">Texto arriba C</div>
+              <img src="Logo_saturno.gif" alt="Logo C" />
+              <div class="text-bottom">Texto abajo C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dots" id="dots2">
+        <span class="dot active" onclick="goToSlide(2, 0)"></span>
+      </div>
+    </div>
+
+    <!-- Pie de página -->
+    <div class="footer">
+      <div class="footer-left">
+        © 2025 Centro de Ayuda con Derechos reservados a sus respectivos dueños.
+      </div>
+      <div class="footer-right">
+        <span>Desarrollado por Mi-abuelo</span>
+        <img src="https://www.habbo.es/habbo-imaging/avatar/hr-3725-31.hd-180-14.ch-807-85.lg-285-81.sh-3068-1408-1408.ha-1017.ca-1812%2Cs-2.g-1.d-2.h-2.a-0%2Ce9b70ea31d888e7bfe3f309d38372007.png" alt="Mi-abuelo" />
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const sliders = {
+      1: document.getElementById('slider1'),
+      2: document.getElementById('slider2')
+    };
+
+    const dotsGroups = {
+      1: document.querySelectorAll('#dots1 .dot'),
+      2: document.querySelectorAll('#dots2 .dot')
+    };
+
+    function goToSlide(sliderNumber, index) {
+      sliders[sliderNumber].style.transform = `translateX(-${index * 100}%)`;
+      dotsGroups[sliderNumber].forEach(dot => dot.classList.remove('active'));
+      dotsGroups[sliderNumber][index].classList.add('active');
+    }
+
+    const menuToggle = document.getElementById("menuToggle");
+    const leftBar = document.getElementById("leftBar");
+    const mainContainer = document.getElementById("mainContainer");
+
+    menuToggle.addEventListener("click", () => {
+      leftBar.classList.toggle("visible");
+      mainContainer.classList.toggle("shifted");
+    });
+  </script>
+</body>
+</html>

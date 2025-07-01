@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inicio de Sesión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 20px 50px;
+      color: #444;
+    }
+
+    /* Navbar */
+    nav.navbar {
+      width: 100%;
+      max-width: 960px;
+      background-color: #1f2937;
+      padding: 12px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+      border-radius: 8px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+    nav.navbar a {
+      color: #d1d5db;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: inset 0 0 0 0 #3b82f6;
+      position: relative;
+      overflow: hidden;
+    }
+    nav.navbar a:hover,
+    nav.navbar a:focus {
+      background-color: #3b82f6;
+      color: #fff;
+      box-shadow: inset 0 0 10px #60a5fa;
+    }
+
+    /* Contenedor */
+    .container {
+      margin-top: 50px;
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 14px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+      padding: 40px 36px 45px;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 28px;
+      font-weight: 700;
+      font-size: 1.9rem;
+      color: #2c3e50;
+      letter-spacing: 0.04em;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    form input[type="text"],
+    form input[type="password"] {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 2px solid #d1d5db;
+      font-size: 16px;
+      margin-bottom: 22px;
+      transition: border-color 0.3s ease;
+      font-weight: 500;
+      color: #111827;
+    }
+    form input[type="text"]:focus,
+    form input[type="password"]:focus {
+      border-color: #2563eb;
+      outline: none;
+      box-shadow: 0 0 8px #3b82f6aa;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background: #2563eb;
+      border: none;
+      border-radius: 12px;
+      padding: 16px 0;
+      font-weight: 700;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.5);
+      transition: background-color 0.35s ease, box-shadow 0.35s ease;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      background: #1d4ed8;
+      box-shadow: 0 12px 25px rgba(29, 78, 216, 0.65);
+      outline: none;
+    }
+
+    .link-register {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 15px;
+      color: #4b5563;
+      user-select: none;
+      font-weight: 500;
+    }
+    .link-register a {
+      color: #2563eb;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    .link-register a:hover,
+    .link-register a:focus {
+      color: #1d4ed8;
+      text-decoration: underline;
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 24px 36px;
+      }
+      nav.navbar {
+        gap: 12px;
+        padding: 10px 0;
+      }
+      nav.navbar a {
+        padding: 8px 14px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <a href="inicio.html" tabindex="0">Inicio</a>
+    <a href="registro.html" tabindex="0">Registro</a>
+    <a href="rango.html" tabindex="0">Rangos</a>
+  </nav>
+
+  <main class="container" role="main">
+    <h2>Inicio de Sesión</h2>
+    <form id="loginForm" novalidate>
+      <label for="nombre">Nombre de usuario</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        required
+        autocomplete="off"
+        aria-required="true"
+        placeholder="Ingresa tu nombre de usuario"
+      />
+      
+      <label for="contrasena">Contraseña</label>
+      <input
+        type="password"
+        id="contrasena"
+        name="contrasena"
+        required
+        aria-required="true"
+        placeholder="Ingresa tu contraseña"
+      />
+
+      <button type="submit" aria-label="Iniciar sesión">Iniciar sesión</button>
+    </form>
+
+    <p class="link-register">
+      ¿No tienes una cuenta? <a href="registro.html">Regístrate aquí</a>
+    </p>
+  </main>
+
+  <script>
+    const form = document.getElementById("loginForm");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nombre = form.nombre.value.trim();
+      const contrasena = form.contrasena.value;
+
+      if (!nombre || !contrasena) {
+        alert("Por favor, completa todos los campos.");
+        return;
+      }
+
+      // Obtener usuarios existentes
+      let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+
+      // Buscar usuario y validar contraseña (case insensitive en nombre)
+      const usuarioEncontrado = usuarios.find(u => u.nombre.toLowerCase() === nombre.toLowerCase());
+
+      if (!usuarioEncontrado) {
+        alert("Usuario no encontrado.");
+        return;
+      }
+
+      if (usuarioEncontrado.contrasena !== contrasena) {
+        alert("Contraseña incorrecta.");
+        return;
+      }
+
+      alert(`¡Bienvenido, ${usuarioEncontrado.nombre}! Serás redirigido a la página de usuario.`);
+      // Guardamos el usuario activo en sessionStorage
+      sessionStorage.setItem("usuarioActivo", JSON.stringify(usuarioEncontrado));
+      window.location.href = "usuario.html";
+    });
+  </script>
+</body>
+</html>

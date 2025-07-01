@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Usuario</title>
+<style>
+  body {
+    background: #0d0d0d;
+    color: #eee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+  }
+  .user-info {
+    background: #111;
+    padding: 30px 50px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #b91c1c;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+  }
+  .user-info h1 {
+    margin-bottom: 16px;
+    font-size: 2rem;
+    color: #f5a623;
+  }
+  .user-info p {
+    font-size: 1.25rem;
+    margin: 10px 0;
+  }
+  .rango {
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-top: 15px;
+    color: #b91c1c;
+  }
+</style>
+</head>
+<body>
+
+<div class="user-info">
+  <h1 id="nombreUsuario">Cargando...</h1>
+  <p>Bienvenido a tu perfil</p>
+  <p>Tu rango es: <span class="rango" id="rangoUsuario">...</span></p>
+</div>
+
+<script>
+  const usuario = localStorage.getItem('usuarioRegistrado');
+
+  if (usuario) {
+    const datos = JSON.parse(usuario);
+    document.getElementById('nombreUsuario').textContent = datos.nombre;
+    document.getElementById('rangoUsuario').textContent = datos.rango;
+  } else {
+    document.getElementById('nombreUsuario').textContent = 'Invitado';
+    document.getElementById('rangoUsuario').textContent = 'No registrado';
+  }
+</script>
+
+</body>
+</html>

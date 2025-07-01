@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Centro Saturno. La mejor opción Unete YAA">
+  <title>Centro Saturno</title>
+  <link rel="icon" href="Logo_saturno.gif">
+
+  <!-- Estilos esenciales -->
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    .bg-negro {
+      background-color: #000;
+      color: rgb(255, 0, 0);
+    }
+    .vh-100 {
+      height: 100vh;
+    }
+    .d-flex {
+      display: flex;
+    }
+    .justify-content-center {
+      justify-content: center;
+    }
+    .align-items-center {
+      align-items: center;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .fade {
+      animation: fadein 2s;
+    }
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Estilos radio abajo a la izquierda */
+    .radio-widget {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      color: #ffd700;
+      font-family: sans-serif;
+      box-shadow: 0 0 10px #ff0;
+    }
+    .radio-widget img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .play-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .volume-control input[type="range"] {
+      width: 80px;
+    }
+    .volume-icon {
+      font-size: 18px;
+    }
+  </style>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <div class="vh-100 justify-content-center d-flex align-items-center text-center bg-negro">
+    <div>
+      <h1 class="fade">CENTRO SATURNO EN MANTENIMIENTO</h1>
+      <img class="fade" src="Logo_saturno.gif" alt="Logo Saturno" width="30%">
+    </div>
+  </div>
+
+  <!-- Radio abajo a la izquierda -->
+  <div class="radio-widget" title="Radio Saturno">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Logo Radio Saturno" />
+    <button class="play-btn" id="playPauseBtn" aria-label="Reproducir/Pausar">
+      <i class="bi bi-play-fill"></i>
+    </button>
+    <div class="radio-label">Radio Saturno</div>
+    <div class="volume-control" title="Volumen">
+      <i class="bi bi-volume-up volume-icon"></i>
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" />
+    </div>
+    <audio id="radioAudio" src="https://stream-uk1.radioparadise.com/mp3-192" preload="none"></audio>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    setTimeout(function () {
+      window.location.href = "";
+    }, 999999); // 9 años
+
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const radioAudio = document.getElementById('radioAudio');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeIcon = document.querySelector('.volume-icon');
+
+    radioAudio.volume = volumeSlider.value;
+
+    playPauseBtn.addEventListener('click', () => {
+      if (radioAudio.paused) {
+        radioAudio.play();
+        playPauseBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+      } else {
+        radioAudio.pause();
+        playPauseBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+      }
+    });
+
+    volumeSlider.addEventListener('input', () => {
+      radioAudio.volume = volumeSlider.value;
+      if (radioAudio.volume == 0) {
+        volumeIcon.className = 'bi bi-volume-mute volume-icon';
+      } else if (radioAudio.volume < 0.5) {
+        volumeIcon.className = 'bi bi-volume-down volume-icon';
+      } else {
+        volumeIcon.className = 'bi bi-volume-up volume-icon';
+      }
+    });
+
+    // Intentar reproducir automáticamente al cargar la página
+    window.addEventListener('load', () => {
+      const playPromise = radioAudio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            playPauseBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+          })
+          .catch((error) => {
+            console.log('Autoplay bloqueado por el navegador:', error);
+            playPauseBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+          });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Usuarios Registrados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      color: #333;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    .no-usuarios {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Lista de Usuarios Registrados</h2>
+  <div id="tablaUsuarios"></div>
+
+  <script>
+    // Obtener usuarios desde localStorage
+    const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+
+    const contenedor = document.getElementById("tablaUsuarios");
+
+    if (usuarios.length === 0) {
+      contenedor.innerHTML = '<p class="no-usuarios">No hay usuarios registrados aún.</p>';
+    } else {
+      const tabla = document.createElement("table");
+
+      // Encabezado
+      tabla.innerHTML = `
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre de Usuario</th>
+            <th>Rango</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${usuarios.map(u => `
+            <tr>
+              <td>${u.id}</td>
+              <td>${u.nombre}</td>
+              <td>${u.rango}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      `;
+
+      contenedor.appendChild(tabla);
+    }
+  </script>
+</body>
+</html>
